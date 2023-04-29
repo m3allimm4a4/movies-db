@@ -8,7 +8,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "run-prod-build": "ng build && http-server -p 8080 -c-1 dist/movies-db-ui"
   },
   "private": true,
   "dependencies": {
