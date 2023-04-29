@@ -1,0 +1,15 @@
+<form class="container" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <div class="col-10">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Enter Movie Name"
+        name="query"
+        [(ngModel)]="query" />
+    </div>
+    <div class="col-2">
+      <button type="submit" class="btn btn-primary mb-3">Search Movies</button>
+    </div>
+  </div>
+</form>

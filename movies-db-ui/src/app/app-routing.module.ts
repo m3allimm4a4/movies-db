@@ -8,6 +8,10 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then(m => m.HomeModule),
   },
   {
+    path: 'movie/:id',
+    loadChildren: () => import('./movie/movie.module').then(m => m.MovieModule),
+  },
+  {
     path: '**',
     pathMatch: 'full',
     redirectTo: '/',

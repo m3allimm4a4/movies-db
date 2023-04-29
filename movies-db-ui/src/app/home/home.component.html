@@ -1,1 +1,6 @@
-<div class="container-fluid"></div>
+<div class="container-fluid" id="home-container">
+  <div class="row g-3">
+    <app-search-bar (searchClicked)="onSearchClicked($event)"></app-search-bar>
+    <app-movies-grid [moviesList]="moviesList"></app-movies-grid>
+  </div>
+</div>

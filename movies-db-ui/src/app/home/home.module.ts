@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from './home-routing.module';
+import { HomeComponent } from './home.component';
+import { MoviesGridComponent } from './movies-grid/movies-grid.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
 
 @NgModule({
-  declarations: [HomeComponent],
-  imports: [CommonModule, FormsModule, HomeRoutingModule, NgbModule],
+  declarations: [HomeComponent, SearchBarComponent, MoviesGridComponent],
+  imports: [CommonModule, FormsModule, HomeRoutingModule],
 })
 export class HomeModule {}

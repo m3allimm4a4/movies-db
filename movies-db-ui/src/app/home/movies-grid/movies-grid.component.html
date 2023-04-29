@@ -1,0 +1,37 @@
+<ng-container *ngIf="moviesList.length !== 0; else noSearchResult">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col" *ngFor="let movie of moviesList">
+      <a [routerLink]="['/movie', movie.id]">
+        <div class="card h-100">
+          <img [src]="movie.backdropUrl" [alt]="movie.title" class="card-img-top" />
+          <div class="card-body">
+            <h5 class="card-title">{{ movie.title }}</h5>
+            <h6 class="card-subtitle">
+              <div class="row">
+                <div class="row justify-content-between">
+                  <div class="col-auto">
+                    {{ movie.releaseDate.toLocaleDateString() }}
+                  </div>
+                  <div class="col-auto">
+                    {{ movie.popularity }}
+                  </div>
+                </div>
+              </div>
+            </h6>
+            <p class="card-text">{{ movie.overview }}</p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #noSearchResult>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-auto">
+        <div class="alert alert-warning" role="alert">No movies were found!</div>
+      </div>
+    </div>
+  </div>
+</ng-template>
