@@ -10,9 +10,10 @@ import { MoviesService } from '../services/movies-service/movies.service';
   styleUrls: ['./movie.component.scss'],
 })
 export class MovieComponent implements OnInit {
-  public movie: Movie = {} as Movie;
+  public movie: Movie | null = null;
 
   constructor(private route: ActivatedRoute, private movieService: MoviesService) {}
+
   ngOnInit(): void {
     this.route.paramMap
       .pipe(

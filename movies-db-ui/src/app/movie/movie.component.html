@@ -1,5 +1,5 @@
 <div class="container" id="movies-container">
-  <div class="row g-4">
+  <div class="row g-4" *ngIf="movie">
     <div class="col-4">
       <div class="card">
         <img class="img-thumbnail" [src]="movie.posterUrl" [alt]="movie.title" />
