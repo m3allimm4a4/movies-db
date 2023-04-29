@@ -5,6 +5,7 @@ import { Movie } from 'src/app/models/movie.interface';
 import { MoviesListResponse } from 'src/app/models/movies-list-response.interface';
 import { AppConfigService } from '../app-config-service/app-config.service';
 import { MovieDetailsResponse } from 'src/app/models/movie-details-response';
+import { MovieDetails } from 'src/app/models/movie-details.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +32,6 @@ export class MoviesService {
               overview: m.overview,
               popularity: m.popularity,
               releaseDate: new Date(m.release_date),
-              posterUrl: this.appConfigService.getImageUrl(m.poster_path),
               backdropUrl: this.appConfigService.getImageUrl(m.backdrop_path),
             };
             return movie;
@@ -40,22 +40,22 @@ export class MoviesService {
       );
   }
 
-  public getMovieDetails(id: number): Observable<Movie> {
+  public getMovieDetails(id: number): Observable<MovieDetails> {
     return this.http.get<MovieDetailsResponse>(`${this.apiUrl}/movie/${id}`).pipe(
       map(m => {
-        const movie: Movie = {
+        const movie: MovieDetails = {
           id: m.id,
           overview: m.overview,
           title: m.title,
           releaseDate: new Date(m.release_date),
           genres: m.genres,
           rating: m.vote_average,
+          popularity: m.popularity,
           creators: m.production_companies.map(p => {
             return { id: p.id, name: p.name };
           }),
           posterUrl: this.appConfigService.getImageUrl(m.poster_path),
           backdropUrl: this.appConfigService.getImageUrl(m.backdrop_path),
-          popularity: m.popularity,
         };
         return movie;
       })

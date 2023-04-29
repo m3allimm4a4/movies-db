@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap, tap, throwError } from 'rxjs';
-import { Movie } from '../models/movie.interface';
+import { MovieDetails } from '../models/movie-details.interface';
 import { MoviesService } from '../services/movies-service/movies.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { MoviesService } from '../services/movies-service/movies.service';
   styleUrls: ['./movie.component.scss'],
 })
 export class MovieComponent implements OnInit {
-  public movie: Movie | null = null;
+  public movie: MovieDetails | null = null;
 
   constructor(private route: ActivatedRoute, private movieService: MoviesService) {}
 
