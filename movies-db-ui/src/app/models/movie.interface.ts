@@ -1,3 +1,4 @@
+import { Creator } from './creator.interface';
 import { Genre } from './genre.interface';
 
 export interface Movie {
@@ -9,4 +10,6 @@ export interface Movie {
   backdropUrl: null | string;
   posterUrl: string;
   genres?: Genre[];
+  rating?: number;
+  creators?: Creator[];
 }

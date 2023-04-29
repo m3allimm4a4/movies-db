@@ -49,6 +49,10 @@ export class MoviesService {
           title: m.title,
           releaseDate: new Date(m.release_date),
           genres: m.genres,
+          rating: m.vote_average,
+          creators: m.production_companies.map(p => {
+            return { id: p.id, name: p.name };
+          }),
           posterUrl: this.appConfigService.getImageUrl(m.poster_path),
           backdropUrl: this.appConfigService.getImageUrl(m.backdrop_path),
           popularity: m.popularity,

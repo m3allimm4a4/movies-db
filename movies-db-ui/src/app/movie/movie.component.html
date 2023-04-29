@@ -13,14 +13,48 @@
             <div class="col-4">
               <h5>Genres</h5>
             </div>
-            <div class="col-8">
+            <div class="col-8 text-secondary">
               <ul>
                 <li *ngFor="let genre of movie.genres">{{ genre.name }}</li>
               </ul>
             </div>
           </div>
-
           <hr />
+
+          <div class="row">
+            <div class="col-4">
+              <h5>Rating</h5>
+            </div>
+            <div class="col-8 text-secondary">{{ movie.rating }}</div>
+          </div>
+          <hr />
+
+          <div class="row">
+            <div class="col-4">
+              <h5>Overview</h5>
+            </div>
+            <div class="col-8 text-secondary">{{ movie.overview }}</div>
+          </div>
+          <hr />
+
+          <div class="row">
+            <div class="col-4">
+              <h5>Release Date</h5>
+            </div>
+            <div class="col-8 text-secondary">{{ movie.releaseDate.toLocaleDateString() }}</div>
+          </div>
+          <hr />
+
+          <div class="row">
+            <div class="col-4">
+              <h5>Creators</h5>
+            </div>
+            <div class="col-8 text-secondary">
+              <ul>
+                <li *ngFor="let creator of movie.creators">{{ creator.name }}</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
