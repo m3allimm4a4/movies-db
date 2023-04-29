@@ -1,7 +1,28 @@
 <div class="container" id="movies-container">
   <div class="row g-4">
-    <div class="col-4">image</div>
+    <div class="col-4">
+      <div class="card">
+        <img class="img-thumbnail" [src]="movie.posterUrl" [alt]="movie.title" />
+      </div>
+    </div>
 
-    <div class="col-8">info</div>
+    <div class="col-8">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-4">
+              <h5>Genres</h5>
+            </div>
+            <div class="col-8">
+              <ul>
+                <li *ngFor="let genre of movie.genres">{{ genre.name }}</li>
+              </ul>
+            </div>
+          </div>
+
+          <hr />
+        </div>
+      </div>
+    </div>
   </div>
 </div>

@@ -1,3 +1,5 @@
+import { Genre } from './genre.interface';
+
 export interface Movie {
   id: number;
   title: string;
@@ -6,4 +8,5 @@ export interface Movie {
   releaseDate: Date;
   backdropUrl: null | string;
   posterUrl: string;
+  genres?: Genre[];
 }

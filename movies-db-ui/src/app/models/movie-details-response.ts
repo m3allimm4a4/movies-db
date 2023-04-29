@@ -1,3 +1,5 @@
+import { Genre } from './genre.interface';
+
 export interface MovieDetailsResponse {
   adult: boolean;
   backdrop_path: string;
@@ -31,11 +33,6 @@ export interface Collection {
   name: string;
   poster_path: string;
   backdrop_path: string;
-}
-
-export interface Genre {
-  id: number;
-  name: string;
 }
 
 export interface ProductionCompany {
