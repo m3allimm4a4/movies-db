@@ -1,4 +1,4 @@
-package com.beshara.moviesdbapi.dao;
+package com.beshara.moviesdbapi.dao.creator;
 
 import com.beshara.moviesdbapi.models.Creator;
 import org.springframework.data.jpa.repository.JpaRepository;

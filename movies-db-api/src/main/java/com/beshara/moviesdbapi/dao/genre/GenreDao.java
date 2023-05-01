@@ -1,4 +1,4 @@
-package com.beshara.moviesdbapi.dao;
+package com.beshara.moviesdbapi.dao.genre;
 
 import com.beshara.moviesdbapi.models.Genre;
 import org.springframework.data.jpa.repository.JpaRepository;

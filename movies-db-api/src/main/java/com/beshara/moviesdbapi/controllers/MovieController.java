@@ -24,7 +24,7 @@ public class MovieController {
 
     @GetMapping("/searchMovies")
     public List<MovieSearchDto> searchMovies(@RequestParam("query") String query) {
-        return movieService.getMovies(query);
+        return movieService.searchMovies(query);
     }
 
     @GetMapping("/getMovieDetails/{id}")

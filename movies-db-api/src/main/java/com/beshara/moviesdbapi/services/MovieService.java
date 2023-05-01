@@ -1,8 +1,8 @@
 package com.beshara.moviesdbapi.services;
 
-import com.beshara.moviesdbapi.dao.CreatorDao;
-import com.beshara.moviesdbapi.dao.GenreDao;
-import com.beshara.moviesdbapi.dao.MovieDao;
+import com.beshara.moviesdbapi.dao.creator.CreatorDao;
+import com.beshara.moviesdbapi.dao.genre.GenreDao;
+import com.beshara.moviesdbapi.dao.movie.MovieDao;
 import com.beshara.moviesdbapi.dto.movie.MovieCreateDto;
 import com.beshara.moviesdbapi.dto.movie.MovieSearchDto;
 import com.beshara.moviesdbapi.exceptions.movie.MovieNotFoundException;
@@ -14,7 +14,6 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,9 +40,12 @@ public class MovieService {
         return movie.orElseThrow();
     }
 
-    public List<MovieSearchDto> getMovies(String query) {
-        List<Movie> movies = movieDao.findByTitleContaining(query);
+    public List<MovieSearchDto> searchMovies(String query) {
+        String dbQuery = query.trim();
+        dbQuery = "%" + dbQuery + "%";
+        List<Movie> movies = movieDao.search(dbQuery);
         List<MovieSearchDto> moviesList = modelMapper.map(movies, new TypeToken<List<MovieSearchDto>>(){}.getType());
+
         return moviesList;
     }
 

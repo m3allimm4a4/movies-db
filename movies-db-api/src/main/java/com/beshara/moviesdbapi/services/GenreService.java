@@ -1,6 +1,6 @@
 package com.beshara.moviesdbapi.services;
 
-import com.beshara.moviesdbapi.dao.GenreDao;
+import com.beshara.moviesdbapi.dao.genre.GenreDao;
 import com.beshara.moviesdbapi.exceptions.genre.GenreContainsMoviesException;
 import com.beshara.moviesdbapi.exceptions.genre.GenreEmptyNameException;
 import com.beshara.moviesdbapi.exceptions.genre.GenreNotFoundException;
