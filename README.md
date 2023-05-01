@@ -1,7 +1,5 @@
-# movies-db
-
-## movies-db-ui
+# movies-db-ui
 Angular Web App
 
-## movies-db-api
+# movies-db-api
 Java Spring Boot REST API
