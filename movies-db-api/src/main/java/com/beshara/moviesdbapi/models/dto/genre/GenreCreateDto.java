@@ -1,7 +1,4 @@
-package com.beshara.moviesdbapi.dto.genre;
-
-import jakarta.persistence.Basic;
-import org.springframework.lang.NonNull;
+package com.beshara.moviesdbapi.models.dto.genre;
 
 public class GenreCreateDto {
     private String name;

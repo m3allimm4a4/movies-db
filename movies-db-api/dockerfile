@@ -1,0 +1,16 @@
+FROM eclipse-temurin:17-jre-alpine AS base
+WORKDIR /app
+EXPOSE 8080
+
+FROM maven:3.9.2-eclipse-temurin-17-alpine AS build
+COPY . /src
+WORKDIR /src
+RUN mvn clean package
+
+FROM build AS publish
+RUN mkdir -p /publish/
+RUN cp ./target/moviesdbapi-0.0.1-SNAPSHOT.jar /publish/app.jar
+
+FROM base as final
+COPY --from=publish /publish/app.jar /app/app.jar
+CMD ["java", "-jar", "/app/app.jar"]

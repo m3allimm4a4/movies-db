@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.beshara.moviesdbapi.mapper.GenreMapper">
+    <resultMap id="GenreResultMap" type="Genre">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, name
+    </sql>
+
+    <select id="findAll" resultMap="GenreResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM Genre
+    </select>
+
+    <select id="findById" resultMap="GenreResultMap" parameterType="long">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM Genre
+        WHERE id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="string">
+        INSERT INTO Genre(name) VALUES(#{name})
+    </insert>
+
+    <update id="update" parameterType="string">
+        UPDATE Genre SET name = #{name}
+    </update>
+
+    <delete id="deleteById" parameterType="long">
+        DELETE FROM Genre WHERE id = #{id}
+    </delete>
+</mapper>

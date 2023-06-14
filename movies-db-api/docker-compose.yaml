@@ -1,0 +1,23 @@
+services:
+  movies-api:
+    build: .
+    ports:
+      - 8080:8080
+    networks:
+      - movies-network
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+
+#  Add database if you don't have it installed
+#  sql-server:
+#    image: mcr.microsoft.com/mssql/server
+#    environment:
+#      - ACCEPT_EULA=Y
+#      - MSSQL_SA_PASSWORD=M0v1$sqldb
+#    networks:
+#      - movies-network
+
+networks:
+  movies-network:
+    name: movies-network
+    external: true

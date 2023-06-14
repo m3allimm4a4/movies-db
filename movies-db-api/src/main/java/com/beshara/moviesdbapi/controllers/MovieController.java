@@ -1,23 +1,21 @@
 package com.beshara.moviesdbapi.controllers;
 
-import com.beshara.moviesdbapi.dto.movie.MovieCreateDto;
-import com.beshara.moviesdbapi.dto.movie.MovieSearchDto;
-import com.beshara.moviesdbapi.exceptions.movie.MovieNotFoundException;
-import com.beshara.moviesdbapi.models.Movie;
+import com.beshara.moviesdbapi.models.dto.movie.MovieCreateDto;
+import com.beshara.moviesdbapi.models.dto.movie.MovieSearchDto;
+import com.beshara.moviesdbapi.models.dbo.Movie;
 import com.beshara.moviesdbapi.services.MovieService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.ErrorResponseException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RequestMapping("api/movie")
+@CrossOrigin(origins = "*")
 @RestController
 public class MovieController {
     private final MovieService movieService;
 
-    @Autowired
     public MovieController(MovieService movieService) {
         this.movieService = movieService;
     }
@@ -29,15 +27,12 @@ public class MovieController {
 
     @GetMapping("/getMovieDetails/{id}")
     public Movie getMovieDetails(@PathVariable("id") int id) {
-        try {
-            return movieService.getMovieDetails(id);
-        } catch (MovieNotFoundException e) {
-            throw new ErrorResponseException(HttpStatus.NOT_FOUND);
-        }
+        return movieService.getMovieDetails(id);
     }
 
     @PostMapping
-    public Movie createMovie(@RequestBody MovieCreateDto movieCreateDto) {
-        return movieService.addMovie(movieCreateDto);
+    public ResponseEntity<?> createMovie(@RequestBody MovieCreateDto movieCreateDto) {
+        movieService.addMovie(movieCreateDto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

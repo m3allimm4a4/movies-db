@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.beshara.moviesdbapi.mapper.MovieMapper">
+    <resultMap id="MovieResultMap" type="Movie">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="overview" property="overview" jdbcType="VARCHAR"/>
+        <result column="popularity" property="popularity" jdbcType="VARCHAR"/>
+        <result column="release_date" property="releaseDate" jdbcType="DATE"/>
+        <result column="backdrop_path" property="backdropPath" jdbcType="VARCHAR"/>
+        <result column="poster_path" property="posterPath" jdbcType="VARCHAR"/>
+        <result column="rating" property="rating" jdbcType="FLOAT"/>
+        <collection property="genres" ofType="com.beshara.moviesdbapi.models.dbo.Genre">
+            <id column="genre_id" property="id" jdbcType="BIGINT"/>
+            <result column="genre_name" property="name" jdbcType="VARCHAR"/>
+        </collection>
+        <collection property="creators" ofType="com.beshara.moviesdbapi.models.dbo.Creator">
+            <id column="creator_id" property="id" jdbcType="BIGINT"/>
+            <result column="creator_name" property="name" jdbcType="VARCHAR"/>
+        </collection>
+    </resultMap>
+
+    <resultMap id="MovieSearchResultMap" type="MovieSearchDto">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="overview" property="overview" jdbcType="VARCHAR"/>
+        <result column="popularity" property="popularity" jdbcType="VARCHAR"/>
+        <result column="release_date" property="releaseDate" jdbcType="DATE"/>
+        <result column="backdrop_path" property="backdropPath" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="search" resultMap="MovieSearchResultMap" parameterType="string">
+        SELECT * FROM movie WHERE title LIKE #{searchString}
+    </select>
+
+    <select id="findById" resultMap="MovieResultMap" parameterType="long">
+        select m.id, m.title, m.overview, m.popularity, m.release_date, m.backdrop_path, m.poster_path, m.rating,
+               g.id as 'genre_id', g.name as 'genre_name', c.id as 'creator_id', c.name as 'creator_name'
+        from movie m
+        inner join movie_genres mg on mg.movie_id = m.id
+        inner join genre g on mg.genre_id = g.id
+        inner join movie_creators mc on mc.movie_id = m.id
+        inner join creator c on mc.creator_id = c.id
+        where m.id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="com.beshara.moviesdbapi.models.dto.movie.MovieCreateDto">
+        INSERT INTO movie (title, overview, popularity, rating, poster_path, backdrop_path, release_date)
+        VALUES (#{movie.title}, #{movie.overview}, #{popularity}, #{releaseDate}, #{backdropPath}, #{posterPath}, #{rating})
+
+        DECLARE @movieId BIGINT = SCOPE_IDENTITY()
+
+        <if test="movie.genreIds.size() > 0">
+            INSERT INTO [dbo].[movie_genres](movie_id, genre_id)
+            VALUES
+            <foreach item="gId" collection="movie.genreIds" open="(" close=")" separator=",">
+                @movieId, #{gId}
+            </foreach>
+        </if>
+
+        <if test="movie.creatorIds.size() > 0">
+            INSERT INTO [dbo].[movie_creators](movie_id, creator_id)
+            VALUES
+            <foreach item="cId" collection="movie.creatorIds" open="(" close=")" separator=",">
+                @movieId, #{cId}
+            </foreach>
+        </if>
+    </insert>
+</mapper>

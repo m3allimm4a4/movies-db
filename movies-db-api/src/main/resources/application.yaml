@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;encrypt=true;trustServerCertificate=true;databaseName=movies_db
+    username: sa
+    password: M0v1$sqldb
+
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*-mapper.xml
+  type-aliases-package: com.beshara.moviesdbapi.models
+
+environment.name: dev

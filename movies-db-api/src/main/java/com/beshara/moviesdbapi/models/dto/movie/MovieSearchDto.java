@@ -1,20 +1,23 @@
-package com.beshara.moviesdbapi.dto.movie;
+package com.beshara.moviesdbapi.models.dto.movie;
 
 import java.util.Date;
-import java.util.List;
 
-public class MovieCreateDto {
+public class MovieSearchDto {
+    private long id;
     private String title;
     private String overview;
     private Double popularity;
     private Date releaseDate;
     private String backdropPath;
-    private String posterPath;
-    private Double rating;
-    private List<Long> genreIds;
-    private List<Long> creatorIds;
 
-    public MovieCreateDto() {
+    public MovieSearchDto(){}
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -55,37 +58,5 @@ public class MovieCreateDto {
 
     public void setBackdropPath(String backdropPath) {
         this.backdropPath = backdropPath;
-    }
-
-    public String getPosterPath() {
-        return posterPath;
-    }
-
-    public void setPosterPath(String posterPath) {
-        this.posterPath = posterPath;
-    }
-
-    public Double getRating() {
-        return rating;
-    }
-
-    public void setRating(Double rating) {
-        this.rating = rating;
-    }
-
-    public List<Long> getGenreIds() {
-        return genreIds;
-    }
-
-    public void setGenreIds(List<Long> genreIds) {
-        this.genreIds = genreIds;
-    }
-
-    public List<Long> getCreatorIds() {
-        return creatorIds;
-    }
-
-    public void setCreatorIds(List<Long> creatorIds) {
-        this.creatorIds = creatorIds;
     }
 }

@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:sqlserver://sql-server:1433;encrypt=true;trustServerCertificate=true;databaseName=movies_db
+  config:
+    activate:
+      on-profile: prod
+
+environment.name: prod

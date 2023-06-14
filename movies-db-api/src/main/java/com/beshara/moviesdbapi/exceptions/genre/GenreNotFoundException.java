@@ -1,6 +1,8 @@
 package com.beshara.moviesdbapi.exceptions.genre;
 
-public class GenreNotFoundException extends RuntimeException{
+import com.beshara.moviesdbapi.exceptions.NotFoundException;
+
+public class GenreNotFoundException extends NotFoundException {
     public GenreNotFoundException() {
         super("Genre Not Found");
     }

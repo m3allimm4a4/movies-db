@@ -1,6 +1,8 @@
 package com.beshara.moviesdbapi.exceptions.movie;
 
-public class MovieNotFoundException extends RuntimeException{
+import com.beshara.moviesdbapi.exceptions.NotFoundException;
+
+public class MovieNotFoundException extends NotFoundException {
     public MovieNotFoundException() {
         super("Movie not found");
     }

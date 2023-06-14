@@ -1,13 +1,11 @@
 package com.beshara.moviesdbapi.controllers;
 
-import com.beshara.moviesdbapi.dto.genre.GenreCreateDto;
-import com.beshara.moviesdbapi.exceptions.genre.GenreNotFoundException;
-import com.beshara.moviesdbapi.models.Genre;
+import com.beshara.moviesdbapi.models.dto.genre.GenreCreateDto;
+import com.beshara.moviesdbapi.models.dbo.Genre;
 import com.beshara.moviesdbapi.services.GenreService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.ErrorResponseException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,8 +14,9 @@ import java.util.List;
 @RestController
 public class GenresController {
     private final GenreService genreService;
+    @Value("${environment.name}")
+    private String test;
 
-    @Autowired
     public GenresController(GenreService genreService) {
         this.genreService = genreService;
     }
@@ -29,34 +28,29 @@ public class GenresController {
 
     @GetMapping("/{id}")
     public Genre getGenre(@PathVariable("id") long id) {
-        try {
-            return genreService.getGenre(id);
-        } catch (GenreNotFoundException e) {
-            throw new ErrorResponseException(HttpStatus.NOT_FOUND);
-        }
+        return genreService.getGenre(id);
     }
 
     @PostMapping
-    public Genre createGenre(@RequestBody GenreCreateDto genreCreateDto) {
-        return genreService.addGenre(genreCreateDto.getName());
+    public ResponseEntity<?> createGenre(@RequestBody GenreCreateDto genreCreateDto) {
+        genreService.addGenre(genreCreateDto.getName());
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public Genre updateGenre(@PathVariable("id") long id, @RequestBody GenreCreateDto newGenre) {
-        try {
-            return genreService.updateGenre(id, newGenre.getName());
-        } catch (GenreNotFoundException e) {
-            throw new ErrorResponseException(HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<Object> updateGenre(@PathVariable("id") long id, @RequestBody GenreCreateDto newGenre) {
+        genreService.updateGenre(id, newGenre.getName());
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteGenre(@PathVariable("id") long id) {
-        try {
-            genreService.deleteGenre(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (GenreNotFoundException e) {
-            throw new ErrorResponseException(HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<Object> deleteGenre(@PathVariable("id") long id) {
+        genreService.deleteGenre(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/test")
+    public String test() {
+        return test;
     }
 }
